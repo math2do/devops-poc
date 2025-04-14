@@ -16,15 +16,13 @@ import (
 type CustomerHandler struct {
 	log             *log.Logger
 	customerService *customer.Service
-	k8sClient       *kubernetes.K8sClient
 }
 
 // NewCustomerHandler ...
 func NewCustomerHandler(log *log.Logger) *CustomerHandler {
 	return &CustomerHandler{
 		log:             log,
-		customerService: customer.NewService(log),
-		k8sClient:       kubernetes.NewK8sClient(log),
+		customerService: customer.NewService(log, kubernetes.NewK8sClient(log)),
 	}
 }
 
@@ -37,7 +35,7 @@ func (ch *CustomerHandler) provisionVMs(ctx *gin.Context) {
 		return
 	}
 
-	// TODO: validate the request payload and run k8s job
+	// TODO: validate req payload
 
 	res, err := ch.customerService.ProvisionVMs(&req)
 	if err != nil {

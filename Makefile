@@ -18,7 +18,7 @@ clean: ## Clean up, i.e. remove build artifacts
 	@go mod tidy
 
 run: build ## Run the binary
-	$(BUILD_DIR)/server
+	$(BUILD_DIR)/server -kubeconfig=$(HOME)/.kube/config
 
 .PHONY: test ## Run tests
 test:
