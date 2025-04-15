@@ -2,13 +2,15 @@ package dtos
 
 // ProvisionVMRequest ...
 type ProvisionVMRequest struct {
-	VMName  string `json:"vm_name"`
-	VMRAM   string `json:"vm_ram"`
-	VMVcpus string `json:"vm_vcpus"`
-	OsType  string `json:"os_type"`
+	VMName        string `json:"vm_name"`
+	VMNetwork     string `json:"vm_network"`
+	VMMemory      string `json:"vm_memory"`
+	VMVCPUs       string `json:"vm_vcpus"`
+	VMZone        string `json:"vm_zone"`
+	CorrelationID string `json:"corelation_id"`
 }
 
 // ProvisionVMResponse ...
 type ProvisionVMResponse struct {
-	VMID string `json:"vm_id"`
+	CorrelationID string `json:"corelation_id"`
 }

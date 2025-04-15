@@ -91,7 +91,7 @@ func homeDir() string {
 }
 
 // LaunchK8sJob ...
-func (c *K8sClient) LaunchK8sJob(jobName string, image string, cmd []string, args []string) error {
+func (c *K8sClient) LaunchK8sJob(jobName string, image string, cmd []string, args []string, env []v1.EnvVar) error {
 	jobs := c.ClientSet.BatchV1().Jobs("default")
 	var backOffLimit int32 = 0
 
@@ -109,6 +109,7 @@ func (c *K8sClient) LaunchK8sJob(jobName string, image string, cmd []string, arg
 							Image:   image,
 							Command: cmd,
 							Args:    args,
+							Env:     env,
 						},
 					},
 					RestartPolicy: v1.RestartPolicyNever,
