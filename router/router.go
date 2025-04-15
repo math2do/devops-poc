@@ -19,6 +19,14 @@ func NewServer() *gin.Engine {
 
 	router := gin.Default()
 
+	// Handle unmatched routes (default handler)
+	router.NoRoute(func(ctx *gin.Context) {
+		ctx.JSON(http.StatusNotFound, gin.H{
+			"error":   "Not Found",
+			"message": "The route you are looking for does not exist",
+		})
+	})
+
 	v1 := router.Group("/v1/automation")
 
 	v1.GET("/health", func(ctx *gin.Context) {
